@@ -902,3 +902,23 @@ form textarea{
     }
     
 }
+/* Example styles for container and light mode */
+.container {
+    transition: background-color 0.3s ease;
+}
+
+.container.light {
+    background-color: #f0f0f0;
+}
+
+#menubar {
+    display: none;
+    /* Additional styles for the menu bar */
+}
+
+#menubar.active {
+    display: block;
+}
+
+/* Add more styles as needed for your layout */
+
