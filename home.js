@@ -1,38 +1,64 @@
+// Function to toggle 'light' class on container element
 function ray() {
-    let container = document.querySelector('.container');
-    let togglebtn = document.querySelector('.toggle');
+    const container = document.querySelector('.container');
+    const togglebtn = document.querySelector('.toggle');
 
-    togglebtn.onclick = function () {
-        container.classList.toggle('light');
+    if (container && togglebtn) {
+        togglebtn.onclick = function () {
+            container.classList.toggle('light');
+        };
+    } else {
+        console.error('Elements not found for ray function');
     }
 }
 
+// Function to toggle 'active' class on menubar
 function jay() {
-    document.getElementById('menubar').classList.toggle('active');
+    const menubar = document.getElementById('menubar');
+
+    if (menubar) {
+        menubar.classList.toggle('active');
+    } else {
+        console.error('Menubar element not found');
+    }
 }
 
+// Function to update date and time every second
 function dates() {
-    function updateClock() {
-        let dt = new Date();
-        let hr = dt.getHours();
-        let min = dt.getMinutes();
-        let sec = dt.getSeconds();
-        let session = 'AM';
-        if (hr === 0) {
-            hr = 12;
-        }
-        if (hr > 12) {
-            hr -= 12;
-            session = 'PM';
-        }
-        hr = (hr < 10) ? "0" + hr : hr;
-        min = (min < 10) ? "0" + min : min;
-        sec = (sec < 10) ? "0" + sec : sec;
-        document.querySelector('.date').innerHTML = dt.toDateString();
-        document.querySelector('.time').innerHTML = `${hr} : ${min} : ${sec} ${session}`;
+    const dt = new Date();
+    let hr = dt.getHours();
+    let min = dt.getMinutes();
+    let sec = dt.getSeconds();
+    let session = 'AM';
+
+    if (hr === 0) {
+        hr = 12;
+    }
+    if (hr > 12) {
+        hr -= 12;
+        session = 'PM';
     }
 
-    // Update the clock immediately, then every second
-    updateClock();
-    setInterval(updateClock, 1000);
+    hr = hr < 10 ? '0' + hr : hr;
+    min = min < 10 ? '0' + min : min;
+    sec = sec < 10 ? '0' + sec : sec;
+
+    const dateElement = document.querySelector('.date');
+    const timeElement = document.querySelector('.time');
+
+    if (dateElement && timeElement) {
+        dateElement.innerHTML = dt.toDateString();
+        timeElement.innerHTML = `${hr}:${min}:${sec} ${session}`;
+    } else {
+        console.error('Date or Time elements not found');
+    }
+
+    setTimeout(dates, 1000);
 }
+
+// Initialize functions
+document.addEventListener('DOMContentLoaded', () => {
+    ray();
+    jay();
+    dates();
+});
